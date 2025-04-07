@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="/static/css/plugins/nice-select.css">
     <!-- Style CSS -->
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/stylecart.css">
 </head>
 
 <body>
@@ -75,7 +76,7 @@
                                                     <th class="width-price">Price</th>
                                                     <th class="width-quantity">Quantity</th>
                                                     <th class="width-subtotal">Subtotal</th>
-                                                    <th class="width-remove">Remove</th>
+                                                    <th class="width-remove">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -103,7 +104,12 @@
                                                                 </span>
                                                             </td>
                                                             <td class="product-quantity">
-                                                                <%= item.quantity %>
+                                                                <div class="quantity-control d-flex align-items-center">
+                                                                    <input type="text" value="<%= item.quantity %>"
+                                                                        id="qty-<%= item.product._id %>" readonly
+                                                                        class="form-control text-center"
+                                                                        style="width: 50px;" />
+                                                                </div>
                                                             </td>
                                                             <td class="product-total">
                                                                 <span>
@@ -112,10 +118,14 @@
                                                                 </span>
                                                             </td>
                                                             <td class="product-remove">
-                                                                <button class="btn btn-danger btn-sm"
-                                                                    onclick="removeFromCart('<%= item.product._id %>')">
-                                                                    <i class="fa fa-trash-o"></i>
-                                                                </button>
+                                                                <div class="action-btns">
+                                                                    <button class="square-btn plus-btn"
+                                                                        onclick="increaseQuantity('<%= item.product._id %>')">+</button>
+                                                                    <button class="square-btn delete-btn"
+                                                                        onclick="removeFromCart('<%= item.product._id %>')">
+                                                                        <i class="fa fa-trash-o"></i>
+                                                                    </button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <% }) %>
@@ -203,6 +213,28 @@
 
     <script>
         console.log("Token được render:", "<%= token %>");
+    </script>
+    <script>
+        function increaseQuantity(productId) {
+            fetch('/order/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ productId, quantity: 1 })
+            })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else {
+                        location.reload();
+                    }
+                })
+                .catch(err => {
+                    console.error("❌", err);
+                    alert("Không thể tăng số lượng!");
+                });
+        }
     </script>
 
 
