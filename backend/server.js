@@ -37,7 +37,7 @@ app.use(bodyParser.json());
     }
 })();
 
-// Import các controller
+// Import các controllerr
 const controller = require("./src/controllers");
 app.use(controller);
 // Khởi động server backend 56804 5000
