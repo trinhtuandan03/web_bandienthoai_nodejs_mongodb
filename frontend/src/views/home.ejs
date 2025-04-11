@@ -38,6 +38,7 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/stylehome.css">
 
 
 </head>
@@ -173,19 +174,6 @@
                             </div>
                             <!--== End Feature Item ==-->
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3 mb-6 ">
-                            <!--== Start Feature Item ==-->
-                            <div class="feature-item border-0 ">
-                                <div class="feature-icon ">
-                                    <img src="/sattic/images/icons/4.png " width="50 " height="38 " alt="Icon ">
-                                </div>
-                                <div class="feature-content ">
-                                    <h4 class="feature-title ">Free Shipping</h4>
-                                    <p>Capped at $50 per order</p>
-                                </div>
-                            </div>
-                            <!--== End Feature Item ==-->
-                        </div>
                     </div>
                 </div>
             </div>
@@ -195,17 +183,10 @@
             <div class="product-area section-two-space ">
                 <div class="container ">
                     <h2 class="text-center mb-4 mt-n2 ">Hot Products</h2>
-                    <div class="masonry-filter-menu text-center mb-8 ">
-                        <button class="active " data-filter="* ">All</button>
-                        <button data-filter=".filterAudio ">Audio/Video</button>
-                        <button data-filter=".filterGamming ">Gamming</button>
-                        <button data-filter=".filterHeadphone ">Headphone</button>
-                        <button data-filter=".filterDigitalCamera ">Digital Camera</button>
-                    </div>
 
-                    <div class="row mb-n6">
+                    <div class="product-grid">
                         <% products.forEach(product=> { %>
-                            <div class="col-sm-6 col-lg-6 col-xl-4 mb-6">
+                            <div class="product-card">
                                 <div class="product-item">
                                     <a class="product-item-thumb" href="/productdetails/<%= product.id %>">
                                         <img src="<%= product.images[0] || '/static/images/default-product.jpg' %>"
@@ -245,7 +226,6 @@
                             </div>
                             <% }) %>
                     </div>
-
                 </div>
             </div>
             <!--== End Product Filter Area Wrapper ==-->

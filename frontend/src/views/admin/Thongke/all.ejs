@@ -17,8 +17,8 @@
     <meta name="robots" content="noindex, nofollow">
     <script nonce="bea0a831-0822-4b06-8312-50544fd9fd85">
         try {
-            (function(w, d) {
-                ! function(j, k, l, m) {
+            (function (w, d) {
+                ! function (j, k, l, m) {
                     j[l] = j[l] || {};
                     j[l].executed = [];
                     j.zaraz = {
@@ -27,8 +27,8 @@
                     };
                     j.zaraz._v = "5671";
                     j.zaraz.q = [];
-                    j.zaraz._f = function(n) {
-                        return async function() {
+                    j.zaraz._f = function (n) {
+                        return async function () {
                             var o = Array.prototype.slice.call(arguments);
                             j.zaraz.q.push({
                                 m: n,
@@ -36,7 +36,7 @@
                             })
                         }
                     };
-                    for (const p of["track", "set", "debug"]) j.zaraz[p] = j.zaraz._f(p);
+                    for (const p of ["track", "set", "debug"]) j.zaraz[p] = j.zaraz._f(p);
                     j.zaraz.init = () => {
                         var q = k.getElementsByTagName(m)[0],
                             r = k.createElement(m),
@@ -54,9 +54,9 @@
                         j[l].o = (new Date).getTimezoneOffset();
                         if (j.dataLayer)
                             for (const w of Object.entries(Object.entries(dataLayer).reduce(((x, y) => ({
-                                    ...x[1],
-                                    ...y[1]
-                                })), {}))) zaraz.set(w[0], w[1], {
+                                ...x[1],
+                                ...y[1]
+                            })), {}))) zaraz.set(w[0], w[1], {
                                 scope: "page"
                             });
                         j[l].q = [];
@@ -65,7 +65,7 @@
                             j[l].q.push(z)
                         }
                         r.defer = !0;
-                        for (const A of[localStorage, sessionStorage]) Object.keys(A || {}).filter((C => C.startsWith("_zaraz_"))).forEach((B => {
+                        for (const A of [localStorage, sessionStorage]) Object.keys(A || {}).filter((C => C.startsWith("_zaraz_"))).forEach((B => {
                             try {
                                 j[l]["z_" + B.slice(7)] = JSON.parse(A.getItem(B))
                             } catch {
@@ -93,60 +93,7 @@
 
 
 
-        <div class="dashboard-header">
-            <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="https://colorlib.com//polygon/concept/index.html">5 con báo</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto navbar-right-top">
-                        <li class="nav-item">
-                            <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="text" placeholder="Search..">
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown notification">
-                            <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span
-                                    class="indicator"></span></a>
-                            <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
-                                <li>
-                                    <div class="notification-title"> Notification</div>
-                                    <div class="notification-list">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="list-footer"> <a href="#">View all notifications</a></div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown connection">
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-fw fa-th"></i> </a>
-                            <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
-                                <li class="connection-list">
-                                </li>
-                                <li>
-                                    <div class="conntection-footer"><a href="#">More</a></div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://colorlib.com//polygon/concept/assets/images/avatar-1.jpg" alt class="user-avatar-md rounded-circle"></a>
-                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">
-                                        5 Con Báo</h5>
-                                    <span class="status"></span><span class="ml-2">Bio</span>
-                                </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Tài Khoản </a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Cài Đặt </a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Đăng Xuất </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+        <%- include('../partical/headerManage') %>
         <div class="nav-left-sidebar sidebar-dark">
             <%- include('../partical/menuManage') %>
         </div>
@@ -159,6 +106,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <h5 class="card-header">Tổng doanh thu toàn bộ người dùng</h5>
+                            <div class="card-body">
+                                <h3 style="color: green;">
+                                    <%= totalRevenue.toLocaleString('vi-VN') %> VNĐ
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="footer">
                 <%- include('../partical/footerManage') %>
@@ -183,7 +143,10 @@
 
         gtag('config', 'UA-23581568-13');
     </script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vef91dfe02fce4ee0ad053f6de4f175db1715022073587" integrity="sha512-sDIX0kl85v1Cl5tu4WGLZCpH/dV9OHbA4YlKCuCiMmOQIk4buzoYDZSFj+TvC71mOBLh8CDC/REgE0GX0xcbjA==" data-cf-beacon='{"rayId":"88fa604b0e42715e","b":1,"version":"2024.4.1","token":"cd0b4b3a733644fc843ef0b185f98241"}'
+    <script defer
+        src="https://static.cloudflareinsights.com/beacon.min.js/vef91dfe02fce4ee0ad053f6de4f175db1715022073587"
+        integrity="sha512-sDIX0kl85v1Cl5tu4WGLZCpH/dV9OHbA4YlKCuCiMmOQIk4buzoYDZSFj+TvC71mOBLh8CDC/REgE0GX0xcbjA=="
+        data-cf-beacon='{"rayId":"88fa604b0e42715e","b":1,"version":"2024.4.1","token":"cd0b4b3a733644fc843ef0b185f98241"}'
         crossorigin="anonymous"></script>
 </body>
 

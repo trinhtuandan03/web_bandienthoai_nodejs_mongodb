@@ -41,6 +41,6 @@ app.use(bodyParser.json());
 const controller = require("./src/controllers");
 app.use(controller);
 // Khởi động server backend 56804 5000
-var server = app.listen(56804, function() {
+var server = app.listen(5000, function() {
     console.log("✅ Mở http://localhost:5000 để kiểm tra API hoạt động.");
 });

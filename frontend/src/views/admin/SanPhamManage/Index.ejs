@@ -155,13 +155,9 @@
                                                             <% } %>
                                                 </td>
                                                 <td>
-                                                    <a href="/SanPhamManage/Details?id=<%= product.id %>"
-                                                        class="btn btn-info btn-sm">Chi tiết</a>
-                                                    <a href="/SanPhamManage/Edit?id=<%= product.id %>"
-                                                        class="btn btn-warning btn-sm">Sửa</a>
-                                                    <a href="/SanPhamManage/Delete?id=<%= product.id %>"
-                                                        class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Bạn có chắc chắn xoá?')">Xoá</a>
+                                                    <a href="/SanPhamManage/Details?id=<%= product.id %>" class="btn btn-info btn-sm">Chi tiết</a>
+                                                    <a href="/SanPhamManage/Edit?id=<%= product.id %>" class="btn btn-warning btn-sm">Sửa</a>
+                                                    <button class="btn btn-danger btn-sm" onclick="deleteProduct('<%= product.id %>')">Xóa</button>
                                                 </td>
                                             </tr>
                                             <% }) %>
@@ -198,6 +194,32 @@
         integrity="sha512-sDIX0kl85v1Cl5tu4WGLZCpH/dV9OHbA4YlKCuCiMmOQIk4buzoYDZSFj+TvC71mOBLh8CDC/REgE0GX0xcbjA=="
         data-cf-beacon='{"rayId":"88fa604b0e42715e","b":1,"version":"2024.4.1","token":"cd0b4b3a733644fc843ef0b185f98241"}'
         crossorigin="anonymous"></script>
+    <script>
+        async function deleteProduct(Id) {
+            if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
+                try {
+                    const response = await fetch('/SanPhamManage/Delete', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ id: Id }), // Gửi ID sản phẩm trong body
+                    });
+
+                    if (response.ok) {
+                        alert('Xóa sản phẩm thành công!');
+                        location.reload(); // Tải lại trang để cập nhật danh sách
+                    } else {
+                        const errorData = await response.json();
+                        alert('Không thể xóa sản phẩm: ' + (errorData.message || 'Lỗi không xác định'));
+                    }
+                } catch (error) {
+                    console.error('Lỗi khi xóa sản phẩm:', error);
+                    alert('Đã xảy ra lỗi khi xóa sản phẩm.');
+                }
+            }
+        }
+    </script>
 </body>
 
 <!-- Mirrored from colorlib.com//polygon/concept/pages/chart-chartist.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Jun 2024 18:13:24 GMT -->

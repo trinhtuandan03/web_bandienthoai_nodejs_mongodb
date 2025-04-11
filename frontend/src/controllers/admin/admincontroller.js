@@ -216,6 +216,30 @@ router.post("/SanPhamManage/Edit", async function (req, res) {
     }
 });
 
+router.post("/SanPhamManage/Delete", async function (req, res) {
+    const token = req.session.token;
+    const id = req.body.id; // Lấy ID sản phẩm từ body request
+
+    if (!token || !id) {
+        return res.status(400).json({ message: "Thiếu token hoặc ID sản phẩm." });
+    }
+
+    try {
+        const response = await axios.delete(`http://localhost:5000/api/product/delete-product?id=${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (response.status === 200) {
+            return res.status(200).json({ message: "Xóa sản phẩm thành công!" });
+        } else {
+            return res.status(response.status).json({ message: response.data.message || "Lỗi không xác định." });
+        }
+    } catch (err) {
+        console.error("❌ Lỗi xóa sản phẩm:", err.message);
+        return res.status(500).json({ message: "Không thể xóa sản phẩm: " + (err.response?.data?.message || err.message) });
+    }
+});
+
 router.get("/BlogManage/Index", async function (req, res) {
     const token = req.session.token;
 
@@ -339,12 +363,53 @@ router.post("/BlogManage/Edit", async function (req, res) {
     }
 });
 
-router.get("/Thongke/all", function (req, res) {
-    res.render("admin/Thongke/all.ejs");
+router.get("/Thongke/all", async (req, res) => {
+    try {
+        const token = req.session.token;
+
+        const response = await axios.get("http://localhost:5000/api/order/total-revenue", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        const total = response.data.total;
+
+        res.render("admin/Thongke/all", {
+            totalRevenue: total,
+            user: req.session.user
+        });
+
+    } catch (err) {
+        console.error("❌ Lỗi lấy tổng doanh thu:", err.message);
+        res.render("admin/Thongke/all", {
+            totalRevenue: 0,
+            user: req.session.user,
+            error: "Không thể lấy tổng doanh thu."
+        });
+    }
 });
-router.get("/Thongke/date", function (req, res) {
-    res.render("admin/Thongke/date.ejs");
+
+router.get("/Thongke/date", async (req, res) => {
+    try {
+        const token = req.session.token;
+        const response = await axios.get("http://localhost:5000/api/order/revenue-by-date", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        res.render("admin/Thongke/date.ejs", {
+            revenueData: response.data
+        });
+
+    } catch (err) {
+        console.error("❌ Lỗi lấy doanh thu theo ngày:", err.message);
+        res.render("admin/Thongke/date.ejs", {
+            revenueData: [],
+            error: "Không thể lấy dữ liệu doanh thu."
+        });
+    }
 });
+
 router.get("/Thongke/month", function (req, res) {
     res.render("admin/Thongke/month.ejs");
 });
