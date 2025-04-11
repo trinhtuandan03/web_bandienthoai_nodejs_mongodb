@@ -1,0 +1,45 @@
+{
+  "type": "Compass Connections",
+  "version": {
+    "$numberInt": "1"
+  },
+  "connections": [
+    {
+      "id": "accd837f-79ef-47a3-b44f-a2f4b816c688",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1743353661639"
+        }
+      },
+      "favorite": {
+        "name": "localhost:27017",
+        "color": "color1"
+      },
+      "savedConnectionType": "recent",
+      "connectionOptions": {
+        "connectionString": "mongodb://localhost:27017/tuandan",
+        "oidc": {
+          "serializedState": "eyJvaWRjUGx1Z2luU3RhdGVWZXJzaW9uIjowLCJzdGF0ZSI6W119"
+        }
+      }
+    },
+    {
+      "id": "f5660404-bde6-489c-81ca-7086693ff4f1",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1744299928673"
+        }
+      },
+      "favorite": {
+        "name": "trinhtuandan-mongodb.fhup4.mongodb.net"
+      },
+      "savedConnectionType": "recent",
+      "connectionOptions": {
+        "connectionString": "mongodb+srv://tuandan:u0SR2ZubvGORwmnF@trinhtuandan-mongodb.fhup4.mongodb.net/webbandienthoai?retryWrites=true&w=majority&appName=trinhtuandan-mongodb",
+        "oidc": {
+          "serializedState": "eyJvaWRjUGx1Z2luU3RhdGVWZXJzaW9uIjowLCJzdGF0ZSI6W119"
+        }
+      }
+    }
+  ]
+}

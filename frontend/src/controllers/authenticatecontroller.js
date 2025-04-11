@@ -33,12 +33,12 @@ router.get("/login", (req, res) => {
 // Xử lý đăng nhập
 router.post("/login", async (req, res) => {
     try {
-        const response = await axios.post("http://localhost:56804/api/auth/login", req.body);
+        const response = await axios.post("http://localhost:5000/api/auth/login", req.body);
         const { token, user } = response.data;
 
-        // Lưu token và role vào session
-        req.session.token = token;
-        req.session.role = user.role;
+        // Lưu token và role và user vào session
+        req.session.token = token; // Lưu token vào session
+        req.session.role = user.role; // Lưu role vào session
         req.session.user = user; // Lưu toàn bộ thông tin người dùng vào session
 
         // Điều hướng dựa trên role

@@ -1,0 +1,34 @@
+----------------------------------------------------------
+------------Chạy backend-----------------
+--tại thư mục gốc
+--mở terminal trên VScode 
+
+cd backend
+node server.js
+
+------------------------------------------
+------------Chạy Frontend------------------
+--mở thêm 1 terminal trên VScode 
+
+cd .. (Để thoát foldel backend)
+
+cd frontend
+node app.js
+
+
+------------------------------------------
+------------file datase trong source code ------------------
+
+--compass-connections.json
+
+
+-------------------------------------------------
+Tài Khoản đăng nhập giao diện admin
+
+username: tuandan
+password: 123456
+-------------------------------------------------
+Tài Khoản đăng nhập vô giao diện User
+
+username: tuandan1
+password: 123456
