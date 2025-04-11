@@ -36,7 +36,9 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="/static/css/style.css">
-
+    <link rel="stylesheet" href="/static/css/productsearch.css">
+    <link rel="stylesheet" href="/static/css/stylehome.css">
+    <link rel="stylesheet" href="/static/css/product.css">
 </head>
 
 <body>
@@ -79,78 +81,63 @@
                             <div class="col-lg-8 col-xl-9">
                                 <!--== Start Product Top Bar Area Wrapper ==-->
                                 <div class="shop-top-bar">
-                                    <form method="GET" action="/product">
+                                    <form method="GET" action="/product" class="d-flex gap-2 flex-wrap">
+                                        <!-- Dropdown lọc danh mục -->
                                         <select name="category" class="select-shoing" onchange="this.form.submit()">
-                                            <option value="" <%=selectedCategory==="" ? "selected" : "" %>>Tất cả danh
-                                                mục
-                                            </option>
-                                            <% categories.forEach(cat=> { %>
-                                                <option value="<%= cat.id %>" <%=selectedCategory===cat.id ? "selected"
-                                                    : "" %>><%= cat.name %>
+                                            <option value="" <%=selectedCategory==="" ? "selected" : "" %>>Tất cả danh mục</option>
+                                            <% categories.forEach(cat => { %>
+                                                <option value="<%= cat.id %>" <%=selectedCategory===cat.id ? "selected" : "" %>>
+                                                    <%= cat.name %>
                                                 </option>
-                                                <% }) %>
+                                            <% }) %>
                                         </select>
+
+                                        <div class="search-box-wrapper position-relative">
+                                            <input type="text" name="keyword" class="form-control search-input"
+                                                placeholder="Tìm sản phẩm..." value="<%= keyword || '' %>">
+                                            <button type="submit" class="search-btn">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
                                     </form>
-                                    <nav class="pagination-area ms-md-auto mt-3 mt-md-0">
-                                        <ul class="page-numbers">
-                                            <li>
-                                                <a class="page-number active" href="shop.html">1</a>
-                                            </li>
-                                            <li>
-                                                <a class="page-number" href="shop.html">2</a>
-                                            </li>
-                                            <li>
-                                                <a class="page-number next" href="shop.html">
-                                                    <i class="icon-arrow-right"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
                                 </div>
                                 <!--== End Product Top Bar Area Wrapper ==-->
-                                <div class="tab-content" id="nav-tabContent">
-                                    <% products.forEach(product=> { %>
-                                        <div class="col-sm-6 col-lg-6 col-xl-4 mb-6">
-                                            <div class="product-item">
-                                                <a class="product-item-thumb" href="/productdetails/<%= product.id %>">
-                                                    <img src="<%= product.images[0] || '/static/images/default-product.jpg' %>"
-                                                        width="270" height="264" alt="<%= product.name %>">
-                                                </a>
-                                                <div class="product-item-action">
-                                                    <button type="button" class="product-action-btn action-btn-wishlist"
-                                                        data-bs-toggle="modal" data-bs-target="#action-WishlistModal">
-                                                        <i class="icon-heart"></i>
-                                                    </button>
-                                                    <button type="button" class="product-action-btn action-btn-compare"
-                                                        data-bs-toggle="modal" data-bs-target="#action-CompareModal">
-                                                        <i class="icon-shuffle"></i>
-                                                    </button>
-                                                    <button type="button"
-                                                        class="product-action-btn action-btn-quick-view"
-                                                        data-bs-toggle="modal" data-bs-target="#action-QuickViewModal">
-                                                        <i class="icon-magnifier"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="product-item-info text-center pb-6">
-                                                    <h5 class="product-item-title mb-2">
-                                                        <a href="/productdetails/<%= product.id %>">
-                                                            <%= product.name %>
-                                                        </a>
-                                                    </h5>
-                                                    <div class="product-item-price">$<%= product.price %>
-                                                    </div>
-                                                    <div class="product-item-review-icon">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                    </div>
+
+                                <!--== Start Product Grid Wrapper ==-->
+                                <div class="product-grid">
+                                    <% products.forEach(product => { %>
+                                        <div class="product-item">
+                                            <a class="product-item-thumb" href="/productdetails/<%= product.id %>">
+                                                <img src="<%= product.images[0] || '/static/images/default-product.jpg' %>"
+                                                    width="270" height="264" alt="<%= product.name %>">
+                                            </a>
+                                            <div class="product-item-action">
+                                                <button type="button" class="product-action-btn action-btn-wishlist"
+                                                    data-bs-toggle="modal" data-bs-target="#action-WishlistModal">
+                                                    <i class="icon-heart"></i>
+                                                </button>
+                                                <button type="button" class="product-action-btn action-btn-compare"
+                                                    data-bs-toggle="modal" data-bs-target="#action-CompareModal">
+                                                    <i class="icon-shuffle"></i>
+                                                </button>
+                                            </div>
+                                            <div class="product-item-info text-center pb-6">
+                                                <h5 class="product-item-title mb-2">
+                                                    <a href="/productdetails/<%= product.id %>"><%= product.name %></a>
+                                                </h5>
+                                                <div class="product-item-price">$<%= product.price %></div>
+                                                <div class="product-item-review-icon">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                    <i class="fa fa-star-o"></i>
                                                 </div>
                                             </div>
                                         </div>
-                                        <% }) %>
+                                    <% }) %>
                                 </div>
+                                <!--== End Product Grid Wrapper ==-->
                             </div>
                         </div>
                     </div>

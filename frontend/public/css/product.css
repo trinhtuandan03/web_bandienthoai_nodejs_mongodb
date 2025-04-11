@@ -1,0 +1,17 @@
+/* Product grid layout */
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Add spacing between items */
+    justify-content: space-between;
+}
+
+.product-grid .product-item {
+    flex: 0 0 calc(25% - 20px); /* 4 items per row with spacing */
+    max-width: calc(25% - 20px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}

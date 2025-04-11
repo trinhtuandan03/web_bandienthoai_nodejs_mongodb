@@ -21,18 +21,18 @@ class OrderService {
     }
 
     async updateCart(userId, productId, quantity) {
-    if (quantity < 1) {
-        throw new Error("Số lượng phải lớn hơn 0");
-    }
+        if (quantity < 1) {
+            throw new Error("Số lượng phải lớn hơn 0");
+        }
 
-    const cartItem = await Cart.findOne({ userId, productId });
-    if (!cartItem) {
-        throw new Error("Sản phẩm không tồn tại trong giỏ hàng");
-    }
+        const cartItem = await Cart.findOne({ userId, productId });
+        if (!cartItem) {
+            throw new Error("Sản phẩm không tồn tại trong giỏ hàng");
+        }
 
-    cartItem.quantity = quantity;
-    await cartItem.save();
-    return cartItem;
+        cartItem.quantity = quantity;
+        await cartItem.save();
+        return cartItem;
     }
 
 
@@ -67,6 +67,28 @@ class OrderService {
             .populate("products.productId")
             .sort({ paidAt: -1 });
     }
+
+    async getTotalRevenue() {
+        const orders = await Order.find({});
+        return orders.reduce((acc, curr) => acc + curr.totalAmount, 0);
+    }
+
+    // Tổng doanh thu theo ngày
+    async getRevenueByDate() {
+        const result = await Order.aggregate([
+            {
+                $group: {
+                    _id: {
+                        $dateToString: { format: "%Y-%m-%d", date: "$paidAt" }
+                    },
+                    totalAmount: { $sum: "$totalAmount" }
+                }
+            },
+            { $sort: { _id: 1 } }
+        ]);
+        return result;
+    }
+
 }
 
 module.exports = OrderService;

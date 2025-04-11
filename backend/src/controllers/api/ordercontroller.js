@@ -80,4 +80,23 @@ router.get("/history", verifyToken, checkMultiRole(["admin", "user"]), async (re
     }
 });
 
+router.get("/total-revenue", verifyToken, checkRole("admin"), async (req, res) => {
+    try {
+        const total = await orderService.getTotalRevenue();
+        res.json({ total });
+    } catch (err) {
+        res.status(500).json({ message: "Lỗi khi lấy tổng doanh thu" });
+    }
+});
+
+router.get("/revenue-by-date", verifyToken, checkRole("admin"), async (req, res) => {
+    try {
+        const data = await orderService.getRevenueByDate();
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ message: "Lỗi khi lấy doanh thu theo ngày" });
+    }
+});
+
+
 module.exports = router;

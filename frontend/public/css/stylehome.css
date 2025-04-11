@@ -1,0 +1,19 @@
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .product-card {
+    flex: 0 0 calc(25% - 15px);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    padding: 10px;
+  }
+  
+  .product-item-info {
+    margin-top: auto; /* đẩy phần info xuống đáy, giữ chiều cao đều */
+  }
+  
